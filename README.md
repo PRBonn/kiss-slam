@@ -71,6 +71,9 @@ If you use this library for any academic work, please cite our original paper:
 }
 ```
 
+## Acknowledgements
+This project builds on top of [KISS-ICP](https://github.com/PRBonn/kiss-icp), [MapClosures](https://github.com/PRBonn/kiss-icp), and [g2o](https://github.com/RainerKuemmerle/g2o).
+
 ## Contributing
 
 We envision KISS-SLAM as a community-driven project. We love to see how the project is growing, thanks to the contributions from the community. We would love to see your face in the list below; open a Pull Request!
