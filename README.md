@@ -6,7 +6,6 @@
     <a href="https://github.com/PRBonn/kiss-slam/blob/main/"><img src="https://img.shields.io/badge/mac%20os-000000?&logo=apple&logoColor=white" /></a>
     <br />
     <br />
-    <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
     <a href="https://github.com/PRBonn/kiss-slam/blob/main/README.md#Install">Install</a>
     <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
     <a href="https://www.ipb.uni-bonn.de/wp-content/papercite-data/pdf/kiss2025iros.pdf">Paper</a>
@@ -28,14 +27,12 @@
 
 ```
 pip install kiss-slam
-
 ```
 
 ## Running the system
 Next, follow the instructions on how to run the system by typing:
 ```
 kiss_slam_pipeline --help
-
 ```
 
 This should print the following help message:
@@ -47,7 +44,6 @@ You can generate a default `config.yaml` by typing:
 
 ```
 kiss_slam_dump_config
-
 ```
 
 which will generate a `kiss_slam.yaml` file. Now, you can modify the parameters and pass the file to the `--config` option when running the `kiss_slam_pipeline`.
@@ -56,7 +52,7 @@ which will generate a `kiss_slam.yaml` file. Now, you can modify the parameters 
 For development purposes:
 
 ```
-sudo apt install g++ python3-pip
+sudo apt install git python3-pip libeigen3-dev libsuitesparse-dev
 git clone https://github.com/PRBonn/kiss-slam.git
 cd kiss-slam
 make editable
@@ -64,8 +60,15 @@ make editable
 
 ## Citation
 If you use this library for any academic work, please cite our original paper:
-```
-TBD
+```bib
+@article{kiss2025arxiv,
+  author   = {T. Guadagnino and B. Mersch and S. Gupta and I. Vizzo and G. Grisetti and C. Stachniss},
+  title    = {{KISS-SLAM: A Simple, Robust, and Accurate 3D LiDAR SLAM System With Enhanced Generalization Capabilities}},
+  journal  = arxiv,
+  year     = 2025,
+  volume   = {arXiv:2503.12660},
+  url      = {https://arxiv.org/pdf/2503.12660},
+}
 ```
 
 ## Contributing
