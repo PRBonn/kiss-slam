@@ -64,7 +64,7 @@ If you use this library for any academic work, please cite our original paper:
 @article{kiss2025arxiv,
   author   = {T. Guadagnino and B. Mersch and S. Gupta and I. Vizzo and G. Grisetti and C. Stachniss},
   title    = {{KISS-SLAM: A Simple, Robust, and Accurate 3D LiDAR SLAM System With Enhanced Generalization Capabilities}},
-  journal  = arxiv,
+  journal  = {arXiv preprint},
   year     = 2025,
   volume   = {arXiv:2503.12660},
   url      = {https://arxiv.org/pdf/2503.12660},
