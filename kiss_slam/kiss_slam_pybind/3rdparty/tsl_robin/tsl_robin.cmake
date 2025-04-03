@@ -22,5 +22,5 @@
 # SOFTWARE.
 include(FetchContent)
 FetchContent_Declare(tessil SYSTEM EXCLUDE_FROM_ALL
-                     URL https://github.com/Tessil/robin-map/archive/refs/tags/v1.3.0.tar.gz)
+                     URL https://github.com/Tessil/robin-map/archive/refs/tags/v1.4.0.tar.gz)
 FetchContent_MakeAvailable(tessil)
