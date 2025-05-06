@@ -77,5 +77,6 @@ PYBIND11_MODULE(kiss_slam_pybind, m) {
     grid_mapper.def(py::init<float, float>(), "resolution"_a, "max_range"_a)
         .def("_integrate_frame", &OccupancyMapper::IntegrateFrame, "pointcloud"_a, "pose"_a)
         .def("_get_active_voxels", &OccupancyMapper::GetOccupancyInformation)
+        .def("_get_occupied_voxels", &OccupancyMapper::GetOccupiedVoxels, "probability_threshold"_a)
         .def("_save_occupancy_volume", &OccupancyMapper::SaveOccupancyVolume, "filename"_a);
 }

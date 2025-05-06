@@ -50,11 +50,17 @@ class OccupancyGridMapper:
 
     def compute_3d_occupancy_information(self):
         active_voxels, occupancies = self.occupancy_mapping_pipeline._get_active_voxels()
-        self.active_voxels = np.asarray(active_voxels, int)
+        self.active_voxels = np.asarray(active_voxels, np.int32)
         self.occupancies = np.asarray(occupancies, float)
         self.occupied_voxels = self.active_voxels[
             np.where(self.occupancies > self.config.occupied_threshold)[0]
         ]
+
+    def compute_3d_occupied_voxels(self):
+        occupied_voxels = self.occupancy_mapping_pipeline._get_occupied_voxels(
+            self.config.occupied_threshold
+        )
+        self.occupied_voxels = np.asarray(occupied_voxels, np.int32)
 
     def compute_2d_occupancy_information(self):
         min_z_idx = int(self.config.z_min // self.config.resolution)

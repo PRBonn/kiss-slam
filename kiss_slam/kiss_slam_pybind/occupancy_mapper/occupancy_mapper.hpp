@@ -40,6 +40,7 @@ public:
 
     void IntegrateFrame(const Vector3fVector &pointcloud, const Eigen::Matrix4f &pose);
     std::tuple<Vector3iVector, std::vector<float>> GetOccupancyInformation() const;
+    Vector3iVector GetOccupiedVoxels(const float occupancy_probability_threshold) const;
     void SaveOccupancyVolume(const std::string &filename) const {
         std::ofstream data(filename, std::ios::binary);
         Bonxai::Serialize(data, map_);

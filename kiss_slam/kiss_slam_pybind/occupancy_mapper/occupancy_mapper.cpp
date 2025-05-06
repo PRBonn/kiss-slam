@@ -35,6 +35,9 @@ static constexpr float logodds_occ = 2.1972f;
 inline float ProbabilityOccupied(const float logodds) {
     return 1.0f - (1.0f / (1.0f + std::exp(logodds)));
 }
+inline float LogOddsOccupied(const float probability) {
+    return std::log((1.0f / (1.0f - probability)) - 1.0f);
+}
 }  // namespace
 
 namespace occupancy_mapper {
@@ -67,6 +70,21 @@ std::tuple<Vector3iVector, std::vector<float>> OccupancyMapper::GetOccupancyInfo
         voxel_occupancies.emplace_back(ProbabilityOccupied(logodds));
     });
     return std::make_tuple(voxel_indices, voxel_occupancies);
+}
+
+Vector3iVector OccupancyMapper::GetOccupiedVoxels(
+    const float occupancy_probability_threshold) const {
+    Vector3iVector voxel_indices;
+    const float logodds_threshold = LogOddsOccupied(occupancy_probability_threshold);
+    const auto num_of_active_voxels = map_.activeCellsCount();
+    voxel_indices.reserve(num_of_active_voxels);
+    map_.forEachCell([&](const float &logodds, const Bonxai::CoordT &voxel) {
+        if (logodds > logodds_threshold) {
+            voxel_indices.emplace_back(Bonxai::ConvertPoint<Eigen::Vector3i>(voxel));
+        }
+    });
+    voxel_indices.shrink_to_fit();
+    return voxel_indices;
 }
 
 void OccupancyMapper::UpdateVoxelOccupancy(const Bonxai::CoordT &coord, const float value) {
