@@ -44,6 +44,7 @@ dependencies = [
     "pydantic>=2",
     "tqdm",
     "pydantic-settings",
+    "click<=8.1", # TODO: Remove
 ]
 
 [project.scripts]
