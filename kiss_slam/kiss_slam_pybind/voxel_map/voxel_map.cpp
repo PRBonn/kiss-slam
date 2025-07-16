@@ -38,7 +38,7 @@ inline Voxel ToVoxelCoordinates(const Eigen::Vector3f &point, const float voxel_
                  static_cast<int>(std::floor(point.z() / voxel_size)));
 }
 
-static constexpr unsigned int min_points_for_covariance_computation = 5;
+static constexpr unsigned int min_points_for_covariance_computation = 3;
 
 std::tuple<Eigen::Vector3f, Eigen::Vector3f> ComputeCentroidAndNormal(
     const voxel_map::VoxelBlock &coordinates) {
