@@ -3,8 +3,8 @@ requires = ["scikit_build_core", "pybind11"]
 build-backend = "scikit_build_core.build"
 
 [project]
-name = "kiss-slam"
-version = "0.0.2"
+name = "perceptual-kiss-slam"
+version = "0.0.3"
 description = "KISS-SLAM: A Simple, Robust, and Accurate 3D LiDAR SLAM System With Enhanced Generalization Capabilities"
 readme = "README.md"
 authors = [
@@ -37,7 +37,7 @@ classifiers = [
 ]
 dependencies = [
     "kiss-icp>=1.2.3",
-    "map_closures>=2.0.2",
+    "perceptual-map_closures>=2.0.3",
     "open3d>=0.19.0",
     "numpy",
     "PyYAML",
@@ -51,7 +51,7 @@ kiss_slam_pipeline="kiss_slam.tools.cli:run"
 kiss_slam_dump_config="kiss_slam.config.config:write_config"
 
 [project.urls]
-Homepage = "https://github.com/PRBonn/kiss-slam"
+Homepage = "https://github.com/perceptual-ai/kiss-slam"
 
 [tool.scikit-build]
 build-dir = "build/{wheel_tag}"
