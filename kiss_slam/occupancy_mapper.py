@@ -81,11 +81,13 @@ class OccupancyGridMapper:
         ] = self.occupancies[indices_in_range]
         self.occupancy_grid = 1.0 - np.max(occupancy_grid, 2)
 
-    def write_3d_occupancy_grid(self, output_dir):
+    def write_3d_occupancy_ply(self, output_dir):
         map_points = (0.5 + self.occupied_voxels) * self.config.resolution
         o3d_pcd = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(map_points))
         o3d_pcd.estimate_normals()
         o3d.io.write_point_cloud(os.path.join(output_dir, "occupancy_pcd.ply"), o3d_pcd)
+    
+    def write_3d_occupancy_boxai_volume(self, output_dir):
         self.occupancy_mapping_pipeline._save_occupancy_volume(
             os.path.join(output_dir, "occupancy_grid_bonxai.bin")
         )

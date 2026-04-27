@@ -62,6 +62,10 @@ class OccupancyMapperConfig(BaseModel):
     max_range: Optional[float] = None
     z_min: float = 0.1
     z_max: float = 0.5
+    export_2d_occupancy_grid: bool = True
+    export_3d_occupancy_ply: bool = True
+    export_3d_occupied_voxels_only: bool = False
+    export_3d_occupancy_boxai_volume: bool = True
 
 
 class PoseGraphOptimizerConfig(BaseModel):

@@ -103,14 +103,21 @@ class SlamPipeline(OdometryPipeline):
                 occupancy_grid_mapper.integrate_frame(
                     deskewed_scan, ref_ground_alignment @ self.poses[idx - self._first]
                 )
-            occupancy_grid_mapper.compute_3d_occupancy_information()
-            occupancy_grid_mapper.compute_2d_occupancy_information()
             occupancy_dir = os.path.join(self.results_dir, "occupancy_grid")
-            os.makedirs(occupancy_dir, exist_ok=True)
-            occupancy_grid_mapper.write_3d_occupancy_grid(occupancy_dir)
-            occupancy_2d_map_dir = os.path.join(occupancy_dir, "map2d")
-            os.makedirs(occupancy_2d_map_dir, exist_ok=True)
-            occupancy_grid_mapper.write_2d_occupancy_grid(occupancy_2d_map_dir)
+            if self.slam_config.occupancy_mapper.export_3d_occupancy_ply:
+                if self.slam_config.occupancy_mapper.export_3d_occupied_voxels_only:
+                    occupancy_grid_mapper.compute_3d_occupied_voxels()
+                else:
+                    occupancy_grid_mapper.compute_3d_occupancy_information()
+                os.makedirs(occupancy_dir, exist_ok=True)
+                occupancy_grid_mapper.write_3d_occupancy_ply(occupancy_dir)
+            if self.slam_config.occupancy_mapper.export_3d_occupancy_boxai_volume:
+                occupancy_grid_mapper.write_3d_occupancy_boxai_volume(occupancy_dir)
+            if self.slam_config.occupancy_mapper.export_2d_occupancy_grid:
+                occupancy_grid_mapper.compute_2d_occupancy_information()
+                occupancy_2d_map_dir = os.path.join(occupancy_dir, "map2d")
+                os.makedirs(occupancy_2d_map_dir, exist_ok=True)
+                occupancy_grid_mapper.write_2d_occupancy_grid(occupancy_2d_map_dir)
 
     def _write_local_maps(self):
         local_maps_dir = os.path.join(self.results_dir, "local_maps")
