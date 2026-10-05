@@ -24,12 +24,11 @@ import os
 
 import numpy as np
 import open3d as o3d
-import yaml
 from kiss_icp.voxelization import voxel_down_sample
-from PIL import Image
 
 from kiss_slam.config import OccupancyMapperConfig
 from kiss_slam.kiss_slam_pybind import kiss_slam_pybind
+from kiss_slam.tools.map_io import write_2d_occupancy_grid
 
 
 class OccupancyGridMapper:
@@ -91,22 +90,11 @@ class OccupancyGridMapper:
         )
 
     def write_2d_occupancy_grid(self, output_dir):
-        image_filename = "map.png"
-        occupancy_image = np.rot90(self.occupancy_grid, 0) * 255.0
-        Image.fromarray(np.asarray(occupancy_image, np.uint8)).save(
-            os.path.join(output_dir, image_filename)
+        write_2d_occupancy_grid(
+            output_dir,
+            self.occupancy_grid,
+            self.lower_bound,
+            self.config.resolution,
+            self.config.occupied_threshold,
+            self.config.free_threshold,
         )
-        grid_info = {
-            "image": image_filename,
-            "resolution": self.config.resolution,
-            "origin": [
-                float(self.lower_bound[0]) * self.config.resolution,
-                float(self.lower_bound[1]) * self.config.resolution,
-                0.0,
-            ],
-            "occupied_thresh": self.config.occupied_threshold,
-            "free_thresh": self.config.free_threshold,
-            "negate": 0,
-        }
-        with open(os.path.join(output_dir, "map.yaml"), "w") as yaml_file:
-            yaml.dump(grid_info, yaml_file, default_flow_style=False, sort_keys=False)
